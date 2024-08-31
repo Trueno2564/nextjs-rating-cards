@@ -27,17 +27,16 @@ function NewPage({ params }) {
         if (params.id){
             const result = await fetch(`/api/ratings/${params.id}`, {
                 method: "PUT",
-                body: JSON.stringify({ currentRating:rate, name, text }),
+                body: JSON.stringify({ rate, name, text }),
                 headers: { 'Content-Type': 'application/json' },
             })
         
         }else{
-            const result = await fetch('/api/ratings', {
+            await fetch('/api/ratings', {
                 method: "POST",
                 body: JSON.stringify({ rate:rate, name:name, text:text }),
                 headers: { 'Content-Type': 'application/json' },
             })
-            // console.log(result)
         }        
         router.push("/")
         router.refresh()
@@ -48,13 +47,13 @@ function NewPage({ params }) {
         <div className='h-screen flex justify-center items-center'>
             <form className='bg-slate-800 p-10 lg:w-1/4 md:w-1/2' onSubmit={onSubmit}>
                 <label htmlFor="rate" className='font-bold text-sm'>Calificacion</label>
-                <input type='text' className='bg-slate-800 p-2 mb-4 w-full text-black' placeholder='' id='rate' 
+                {/* <input type='text' className='bg-slate-800 p-2 mb-4 w-full text-black' placeholder='' id='rate' 
                 onChange={(e) => setRate(e.target.value)}
-                value={rate}/>
+                value={rate}/> */}
                 <div className='flex my-5 gap-1'>
                     {[...Array(5)].map((star, index) => {
                         const currentRating = index + 1;
-                        console.log(rate)
+                        // const rate = currentRating
                         return (
                             <label>
                                 <input
