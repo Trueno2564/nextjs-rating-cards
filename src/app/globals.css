@@ -6,3 +6,11 @@
 body{
   @apply bg-gray-950 text-white
 }
+
+input[type=radio]{
+  display: none;
+}
+
+.starRating{
+  cursor: pointer;
+}

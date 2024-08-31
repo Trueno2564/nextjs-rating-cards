@@ -1,16 +1,18 @@
 'use client'
 import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react';
+import { FaStar } from "react-icons/fa";
 
 function NewPage({ params }) {
     const router = useRouter();
     const [rate, setRate] = useState("")
     const [name, setName] = useState("")
     const [text, setText] = useState("")
+    const [hover, setHover] = useState(null)
 
     useEffect(() => {
         if(params.id){
-            fetch(`/api/rating/${params.id}`)
+            fetch(`/api/ratings/${params.id}`)
             .then((res) => res.json())
             .then((data) => {
                 setRate(data.rating)
@@ -23,12 +25,11 @@ function NewPage({ params }) {
     const onSubmit = async (e) =>{
         e.preventDefault();
         if (params.id){
-            // const result = await fetch(`/api/ratings/${params.id}`, {
-            //     method: "PUT",
-            //     body: JSON.stringify({ rate, name, text }),
-            //     headers: { 'Content-Type': 'application/json' },
-            // })
-            console.log("asdasdasdasd")
+            const result = await fetch(`/api/ratings/${params.id}`, {
+                method: "PUT",
+                body: JSON.stringify({ currentRating:rate, name, text }),
+                headers: { 'Content-Type': 'application/json' },
+            })
         
         }else{
             const result = await fetch('/api/ratings', {
@@ -36,19 +37,46 @@ function NewPage({ params }) {
                 body: JSON.stringify({ rate:rate, name:name, text:text }),
                 headers: { 'Content-Type': 'application/json' },
             })
-            console.log(result)
+            // console.log(result)
         }        
         router.push("/")
         router.refresh()
     }
+    
 
     return (
         <div className='h-screen flex justify-center items-center'>
             <form className='bg-slate-800 p-10 lg:w-1/4 md:w-1/2' onSubmit={onSubmit}>
                 <label htmlFor="rate" className='font-bold text-sm'>Calificacion</label>
-                <input type='text' className='bg-slate-800 p-2 mb-4 w-full text-black' required placeholder='⭐⭐⭐⭐⭐' id='rate' 
+                <input type='text' className='bg-slate-800 p-2 mb-4 w-full text-black' placeholder='' id='rate' 
                 onChange={(e) => setRate(e.target.value)}
                 value={rate}/>
+                <div className='flex my-5 gap-1'>
+                    {[...Array(5)].map((star, index) => {
+                        const currentRating = index + 1;
+                        console.log(rate)
+                        return (
+                            <label>
+                                <input
+                                    // onChange={(e) => setRate(index.target.value)}
+                                    type='radio'
+                                    id='rate'
+                                    value={rate}
+                                    onClick={() => setRate(currentRating)}
+                                />
+                                
+                                <FaStar 
+                                    size={25} 
+                                    className='starRating'
+                                    color={currentRating <= (hover || rate)? "#ffc107" : "e4e5e9"}
+                                    onMouseEnter={() => setHover(currentRating)}
+                                    onMouseLeave={() => setHover(null)}
+                                />
+                                
+                            </label>
+                        )
+                    })}
+                </div>
                 <label htmlFor="name" className='font-bold text-sm'>Nombre</label>
                 <input type='text' className='border border-gray-400 p-2 mb-4 w-full text-black' required placeholder='Brian Regalado' id='name' 
                 onChange={(e) => setName(e.target.value)}
@@ -61,7 +89,7 @@ function NewPage({ params }) {
                 {params.id && (
                     <button className='bg-red-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ml-4' type='button'
                     onClick={async() => {
-                        await fetch(`/api/task/${params.id}`, {
+                        await fetch(`/api/ratings/${params.id}`, {
                             method: "DELETE"
                         })
                         router.push("/")
