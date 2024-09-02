@@ -37,6 +37,8 @@ function NewPage({ params }) {
                 body: JSON.stringify({ rate:rate, name:name, text:text }),
                 headers: { 'Content-Type': 'application/json' },
             })
+            // const data = res.json()
+            // console.log("datos => "+ data)
         }        
         router.push("/")
         router.refresh()
@@ -47,17 +49,17 @@ function NewPage({ params }) {
         <div className='h-screen flex justify-center items-center'>
             <form className='bg-slate-800 p-10 lg:w-1/4 md:w-1/2' onSubmit={onSubmit}>
                 <label htmlFor="rate" className='font-bold text-sm'>Calificacion</label>
-                {/* <input type='text' className='bg-slate-800 p-2 mb-4 w-full text-black' placeholder='' id='rate' 
+                <input type='text' className='border border-gray-400 p-2 mb-4 w-full text-black' placeholder='calificacion de 1 al 5' id='rate' 
                 onChange={(e) => setRate(e.target.value)}
-                value={rate}/> */}
-                <div className='flex my-5 gap-1'>
+                value={rate}/>
+                {/* <div className='flex my-5 gap-1'>
                     {[...Array(5)].map((star, index) => {
                         const currentRating = index + 1;
                         // const rate = currentRating
                         return (
                             <label>
                                 <input
-                                    // onChange={(e) => setRate(index.target.value)}
+                                    onChange={() => setRate(currentRating)}
                                     type='radio'
                                     id='rate'
                                     value={rate}
@@ -75,7 +77,7 @@ function NewPage({ params }) {
                             </label>
                         )
                     })}
-                </div>
+                </div> */}
                 <label htmlFor="name" className='font-bold text-sm'>Nombre</label>
                 <input type='text' className='border border-gray-400 p-2 mb-4 w-full text-black' required placeholder='Brian Regalado' id='name' 
                 onChange={(e) => setName(e.target.value)}
