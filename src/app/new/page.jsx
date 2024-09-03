@@ -1,7 +1,6 @@
 'use client'
 import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react';
-import { FaStar } from "react-icons/fa";
 
 function NewPage({ params }) {
     const router = useRouter();
@@ -52,32 +51,6 @@ function NewPage({ params }) {
                 <input type='text' className='border border-gray-400 p-2 mb-4 w-full text-black' placeholder='calificacion de 1 al 5' id='rate' 
                 onChange={(e) => setRate(e.target.value)}
                 value={rate}/>
-                {/* <div className='flex my-5 gap-1'>
-                    {[...Array(5)].map((star, index) => {
-                        const currentRating = index + 1;
-                        // const rate = currentRating
-                        return (
-                            <label>
-                                <input
-                                    onChange={() => setRate(currentRating)}
-                                    type='radio'
-                                    id='rate'
-                                    value={rate}
-                                    onClick={() => setRate(currentRating)}
-                                />
-                                
-                                <FaStar 
-                                    size={25} 
-                                    className='starRating'
-                                    color={currentRating <= (hover || rate)? "#ffc107" : "e4e5e9"}
-                                    onMouseEnter={() => setHover(currentRating)}
-                                    onMouseLeave={() => setHover(null)}
-                                />
-                                
-                            </label>
-                        )
-                    })}
-                </div> */}
                 <label htmlFor="name" className='font-bold text-sm'>Nombre</label>
                 <input type='text' className='border border-gray-400 p-2 mb-4 w-full text-black' required placeholder='Brian Regalado' id='name' 
                 onChange={(e) => setName(e.target.value)}
