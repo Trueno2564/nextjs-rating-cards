@@ -8,7 +8,9 @@ function Projects() {
         <Fragment>
             <div className='p-10 text-center'>
                 <h1 className='text-3xl mb-5'>Create custom Modal in Next JS with Tailwind CSS</h1>
-                <button className='text-white bg-blue-700 hover:bg-blue-800 focus:outline-none front-medium text-sm rounded-lg px-5 mx-5 py-2.5 text-centermr-5' onClick={() => setShowModal(true)}>Text Modal</button>
+                <div className='w-[100px]'>
+                    <img src='https://workana.s3.amazonaws.com/portfolios/cl/596d8f16e8df03bdb30b008995b40b93/Prototipo0.png?response-content-disposition=inline%3Bfilename%3D%22Prototipo0.png%22&response-content-type=image%2Fpng&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIA33COQEVTJSIXHA73%2F20240902%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20240902T230802Z&X-Amz-SignedHeaders=host&X-Amz-Expires=21600&X-Amz-Signature=d2c803df5e3ce77e126edc71e0d490d7ef5dedd594a463605b19b88addce9756' className='w-fu'/>
+                </div>
             </div>
             <Modal isVisible={showModal} onClose={() => setShowModal(false)} className=''>
                 <div className='flex gap-5 h-full'>
